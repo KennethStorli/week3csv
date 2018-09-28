@@ -10,6 +10,18 @@
 		<script src="javascripts/c3.min.js"></script>
 		<script src="javascripts/papaparse.min.js"></script>
   	</head>
+     <script>
+            d3.csv("./data.csv", function(data)
+                {
+                    for(var i = 0; i < data.length; i++)
+                    {
+                        console.log(data[i]);
+                        //console.log(data[i].Name);
+                        //console.log(data[i].Age);
+                    }
+
+                });
+        </script>
     <script>
       var csvfile = "";
       function urlbtn() {
@@ -27,8 +39,31 @@
       </div>
 
 
-
-
+<main>
+      <div class="jumbotron vertical-center">
+        <div class="container">
+            <div class="row">
+              <div class="column">
+                <select id="dd1ViewBy">
+                <option value="1">Sepal Length</option>
+                <option value="2" selected="selected">Sepal Width</option>
+                <option value="3">Petal Length</option>
+                <option value="4">Petal Width</option>
+                </select>
+          </div>
+        
+          <div class="column">
+        <select id="dd2ViewBy">
+                <option value="1">Sepal Length</option>
+                <option value="2" selected="selected">Sepal Width</option>
+                <option value="3">Petal Length</option>
+                <option value="4">Petal Width</option>
+        </select>
+        </div>    
+        </div>
+      </div>
+    </div>
+  </main>
 
 
 
