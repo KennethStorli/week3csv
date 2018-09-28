@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Graphs from CSVs</title>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<link href="stylesheets/c3.css" rel="stylesheet" type="text/css">
+		<script src="javascripts/c3.min.js"></script>
+		<script src="javascripts/papaparse.min.js"></script>
+  	</head>
+    <script>
+      var csvfile = "";
+      function urlbtn() {
+        csvfile = document.getElementById("csvurl").value;
+        document.getElementById("urltext").innerHTML = "Selected file: " + csvfile;
+      }
+      
+    </script>
+  	<body>
+      <div id="filecontainer">
+        Add url to a csv file:
+        <input id="csvurl" type="url">
+        <button onclick="urlbtn()" type="submit">Use</button>
+        <div id="urltext"></div>
+      </div>
+
+
+
+
+
+
+
+
+
+  	     <!-- Footer -->
+        <footer class="footer">      
+            <div class="footer-bottom">
+              <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <p class="text-center">Copyright @ Arne, Håvard og Kenneth
+                    <p class="text-center"><a href="#">Back to top</a></p>
+            </div>
+            </footer>
+        <script src="javascripts/create-graph.js"></script>
+        <script src="javascripts/create-graph2.js"></script>
+    </body>
+</html>
