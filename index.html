@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Graphs from CSVs</title>
-		<meta charset="utf-8">
+  <head>
+    <title>Graphs from CSVs</title>
+    
+
+    <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<link href="stylesheets/c3.css" rel="stylesheet" type="text/css">
-		<script src="javascripts/c3.min.js"></script>
-		<script src="javascripts/papaparse.min.js"></script>
-  	</head>
-     <script>
+
+        <link href="stylesheets/style.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/c3.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Load d3.js and c3.js -->
+    <script src="javascripts/d3.min.js" charset="utf-8"></script>
+    <script src="javascripts/c3.min.js"></script>
+
+    <!-- Load papaparse.js -->
+    <script src="javascripts/papaparse.min.js"></script>
+
+    <script>
             d3.csv("./data.csv", function(data)
                 {
                     for(var i = 0; i < data.length; i++)
@@ -22,7 +29,7 @@
 
                 });
         </script>
-    <script>
+        <script>
       var csvfile = "";
       function urlbtn() {
         csvfile = document.getElementById("csvurl").value;
@@ -30,54 +37,62 @@
       }
       
     </script>
-  	<body>
-      <div id="filecontainer">
-        Add url to a csv file:
-        <input id="csvurl" type="url">
-        <button onclick="urlbtn()" type="submit">Use</button>
-        <div id="urltext"></div>
-      </div>
-
-
-<main>
+    </head>
+    <body>
+      <script src="d3.min.js"></script>
+<nav>
+</nav>
+        <!-- Main -->
+        <main>
       <div class="jumbotron vertical-center">
         <div class="container">
+            
             <div class="row">
               <div class="column">
-                <select id="dd1ViewBy">
-                <option value="1">Sepal Length</option>
-                <option value="2" selected="selected">Sepal Width</option>
-                <option value="3">Petal Length</option>
-                <option value="4">Petal Width</option>
-                </select>
-          </div>
-        
-          <div class="column">
-        <select id="dd2ViewBy">
-                <option value="1">Sepal Length</option>
-                <option value="2" selected="selected">Sepal Width</option>
-                <option value="3">Petal Length</option>
-                <option value="4">Petal Width</option>
-        </select>
+              <div id="filecontainer">
+              <div id="label">Add url to a csv file:</div>
+              <input id="csvurl" type="url">
+              <button onclick="urlbtn()" type="submit">Use</button><div id="urltext"></div>
+        </div>
+        </div>
+        <div class="column">
+                <div id="label"><b>x-Axis:</b></div>
+        <select name="xAX" id="xAXs">
+        <option value ="petalWidth">Petal Width</option>
+        <option value ="petalLength">Petal Length</option>
+        <option value ="sepalLength">Sepal Length</option>
+        <option value ="sepalWidth">Sepal Width</option>
+              </select>
+              <div id="filter">
+          <b>Species Filter:</b>
+        <br>
+          <input name='v' value="Iris-setosa" type="checkbox" checked>Iris-setosa
+        <br>
+          <input name="v" value="Iris-versicolor" type="checkbox" checked >Iris-versicolor
+        <br>
+          <input name="v" value="Iris-virginica" type="checkbox" checked >Iris-virginica
+        </div>
+                <div id="label2"><b>y-Axis:</b></div>
+            <select name="yAX" id="yAXs">
+        <option value ="petalWidth">Petal Width</option>
+        <option value ="petalLength">Petal Length</option>
+        <option value ="sepalLength">Sepal Length</option>
+        <option value ="sepalWidth">Sepal Width</option>
+          </select>  
         </div>    
         </div>
       </div>
     </div>
-  </main>
-
-
-
-
-
-  	     <!-- Footer -->
+    </main>
+        <!-- Footer -->
         <footer class="footer">      
+            
             <div class="footer-bottom">
-              <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                     <p class="text-center">Copyright @ Arne, Håvard og Kenneth
                     <p class="text-center"><a href="#">Back to top</a></p>
             </div>
             </footer>
-        <script src="javascripts/create-graph.js"></script>
-        <script src="javascripts/create-graph2.js"></script>
+<script src="graph.js"></script>
     </body>
 </html>
+
