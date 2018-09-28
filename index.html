@@ -72,10 +72,14 @@ right: 0px;
 </style>
 
 <body>
+<br><br><br><br>
+Add url to csv file: <input id="urlinput" type="url">
+<button id="urlbtn" onclick="applycsv()">Apply URL</button>
+<button id="resetbtn" onclick="resetcsv()">Reset</button>
+<div id="urltext"></div>
 
 
 <script src="d3.min.js"></script>
- 
 <br><br>
 
   <div id="filter">
@@ -95,7 +99,7 @@ right: 0px;
     <div><input type="radio" name="sepal" value="sepalLength">Sepal Length</div>
   </form>
 
-<div id="label"><b>x-Axis:</b></div>
+<!-- <div id="label"><b>x-Axis:</b></div>-->
   <select name="xAX" id="xAXs">
         <option value ="petalWidth">petalWidth</option>
         <option value ="petalLength">petalLength</option>
@@ -103,7 +107,7 @@ right: 0px;
         <option value ="sepalWidth">sepalWidth</option>
   </select>
 
-<div id="label2"><b>y-Axis:</b></div>
+<!-- <div id="label2"><b>y-Axis:</b></div> -->
   <select name="yAX" id="yAXs">
         <option value ="petalLength">petalLength</option>
         <option value ="petalWidth">petalWidth</option>
@@ -112,6 +116,27 @@ right: 0px;
   </select>  
 
   <br>
-  
- <script src="script.js"></script>
+  <script type="text/javascript">
+    var urlcsv = "";
+    var loaded = false;
+
+    function applycsv() {
+      urlcsv = document.getElementById("urlinput").value;
+      document.getElementById("urltext").innerHTML = "Selected file: " + urlcsv;
+
+      if(urlcsv && loaded == false) {
+        var fileImport = document.createElement('script');
+        fileImport.src = 'script.js';
+        document.head.appendChild(fileImport);
+        loaded = true;
+      } 
+    }
+
+    function resetcsv() {
+      var input = document.getElementById("urlinput");
+      input.value = "";
+      location.reload();
+    }
+  </script>
+ <!--<script src="script.js"></script>-->
 </body>
