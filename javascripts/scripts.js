@@ -113,7 +113,7 @@ function update(){
 }
 
 var baseData = null;
-d3.csv("iris.csv", function(error, csv) {
+d3.csv("data/data.csv", function(error, csv) {
   csv.forEach(function(d) {
     d.petalLength = +d.petalLength;
     d.petalWidth = +d.petalWidth;
@@ -131,3 +131,5 @@ d3.selectAll('select').on('change',function(){
 d3.selectAll('input').on('click', function(){
   update();
 })
+
+

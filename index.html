@@ -1,98 +1,117 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Graphs from CSVs</title>
-    
+<meta charset="utf-8">
+<style>
 
-    <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+/*set the axis line color, dot stroke, font size, and font position*/
+body {
+  font: 15px sans-serif;
+}
 
-        <link href="stylesheets/style.css" rel="stylesheet" type="text/css">
-    <link href="stylesheets/c3.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- Load d3.js and c3.js -->
-    <script src="javascripts/d3.min.js" charset="utf-8"></script>
-    <script src="javascripts/c3.min.js"></script>
+.name{
+  position: relative;
+  top: 90px;
+  text-align: left;
+  font-weight: bold;
+}
 
-    <!-- Load papaparse.js -->
-    <script src="javascripts/papaparse.min.js"></script>
+.title {
+  position: relative;
+  text-align: left;
+  font-size: 25px;
+}
 
-    <script>
-            d3.csv("./data.csv", function(data)
-                {
-                    for(var i = 0; i < data.length; i++)
-                    {
-                        console.log(data[i]);
-                        //console.log(data[i].Name);
-                        //console.log(data[i].Age);
-                    }
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
 
-                });
-        </script>
-        <script>
-      var csvfile = "";
-      function urlbtn() {
-        csvfile = document.getElementById("csvurl").value;
-        document.getElementById("urltext").innerHTML = "Selected file: " + csvfile;
-      }
-      
-    </script>
-    </head>
-    <body>
-      <script src="d3.min.js"></script>
-<nav>
-</nav>
-        <!-- Main -->
-        <main>
-      <div class="jumbotron vertical-center">
-        <div class="container">
-            
-            <div class="row">
-              <div class="column">
-              <div id="filecontainer">
-              <div id="label">Add url to a csv file:</div>
-              <input id="csvurl" type="url">
-              <button onclick="urlbtn()" type="submit">Use</button><div id="urltext"></div>
-        </div>
-        </div>
-        <div class="column">
-                <div id="label"><b>x-Axis:</b></div>
-        <select name="xAX" id="xAXs">
-        <option value ="petalWidth">Petal Width</option>
-        <option value ="petalLength">Petal Length</option>
-        <option value ="sepalLength">Sepal Length</option>
-        <option value ="sepalWidth">Sepal Width</option>
-              </select>
-              <div id="filter">
-          <b>Species Filter:</b>
+.dot {
+  stroke: #000;
+}
+
+#filter {
+  position: absolute;
+}
+
+#mark {
+  padding-left: 150px;
+  position: inherit;
+}
+
+#xAXs {
+  position: relative;
+  left: 290px;
+  bottom: 30px;
+}
+
+#yAXs {
+position: relative;
+bottom: 30px;
+left: 315px;
+
+}
+
+#label {
+position: absolute;
+top: 599px;
+bottom: 125px;
+left: 300px;
+right: 0px;
+}
+
+#label2 {
+position: absolute;
+top: 599px;
+bottom: 125px;
+left: 430px;
+right: 0px;
+}
+
+</style>
+
+<body>
+
+
+<script src="javascripts/d3.min.js"></script>
+ 
+<br><br>
+
+  <div id="filter">
+    <b>Species Filter:</b>
         <br>
-          <input name='v' value="Iris-setosa" type="checkbox" checked>Iris-setosa
+    <input name='v' value="Iris-setosa" type="checkbox" checked>Iris-setosa
         <br>
-          <input name="v" value="Iris-versicolor" type="checkbox" checked >Iris-versicolor
+    <input name="v" value="Iris-versicolor" type="checkbox" checked >Iris-versicolor
         <br>
-          <input name="v" value="Iris-virginica" type="checkbox" checked >Iris-virginica
-        </div>
-                <div id="label2"><b>y-Axis:</b></div>
-            <select name="yAX" id="yAXs">
-        <option value ="petalWidth">Petal Width</option>
-        <option value ="petalLength">Petal Length</option>
-        <option value ="sepalLength">Sepal Length</option>
-        <option value ="sepalWidth">Sepal Width</option>
-          </select>  
-        </div>    
-        </div>
-      </div>
-    </div>
-    </main>
-        <!-- Footer -->
-        <footer class="footer">      
-            
-            <div class="footer-bottom">
-                    <p class="text-center">Copyright @ Arne, Håvard og Kenneth
-                    <p class="text-center"><a href="#">Back to top</a></p>
-            </div>
-            </footer>
-<script src="graph.js"></script>
-    </body>
-</html>
+    <input name="v" value="Iris-virginica" type="checkbox" checked >Iris-virginica
+  </div>
 
+
+  <form id="mark">
+    <b>Size of Mark:</b>
+    <div><input type="radio" name="sepal" value='sepalWidth' checked>Sepal Width</div>
+    <div><input type="radio" name="sepal" value="sepalLength">Sepal Length</div>
+  </form>
+
+<div id="label"><b>x-Axis:</b></div>
+  <select name="xAX" id="xAXs">
+        <option value ="petalWidth">petalWidth</option>
+        <option value ="petalLength">petalLength</option>
+        <option value ="sepalLength">sepalLength</option>
+        <option value ="sepalWidth">sepalWidth</option>
+  </select>
+
+<div id="label2"><b>y-Axis:</b></div>
+  <select name="yAX" id="yAXs">
+        <option value ="petalLength">petalLength</option>
+        <option value ="petalWidth">petalWidth</option>
+        <option value ="sepalLength">sepalLength</option>
+        <option value ="sepalWidth">sepalWidth</option>
+  </select>  
+
+  <br>
+  
+ <script src="javascripts/script.js"></script>
+</body>
