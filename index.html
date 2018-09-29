@@ -40,7 +40,7 @@ body {
   position: inherit;
 }
 
-#xAXs {
+/*#xAXs {
   position: relative;
   left: 290px;
   bottom: 30px;
@@ -51,9 +51,9 @@ position: relative;
 bottom: 30px;
 left: 315px;
 
-}
+}*/
 
-#label {
+/*#label {
 position: absolute;
 top: 599px;
 bottom: 125px;
@@ -67,7 +67,7 @@ top: 599px;
 bottom: 125px;
 left: 430px;
 right: 0px;
-}
+}*/
 
 </style>
 
@@ -79,10 +79,13 @@ Add url to csv file: <input id="urlinput" type="url">
 <div id="urltext"></div>
 
 
+<!--<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>-->
 <script src="d3.min.js"></script>
 <br><br>
 
-  <div id="filter">
+  <!--<div id="filter">
     <b>Species Filter:</b>
         <br>
     <input name='v' value="Iris-setosa" type="checkbox" checked>Iris-setosa
@@ -97,46 +100,94 @@ Add url to csv file: <input id="urlinput" type="url">
     <b>Size of Mark:</b>
     <div><input type="radio" name="sepal" value='sepalWidth' checked>Sepal Width</div>
     <div><input type="radio" name="sepal" value="sepalLength">Sepal Length</div>
-  </form>
-
-<!-- <div id="label"><b>x-Axis:</b></div>-->
-  <select name="xAX" id="xAXs">
-        <option value ="petalWidth">petalWidth</option>
+  </form>-->
+<p id="scatterAvail"></p>
+<div id="scatterplot">
+	<h2>Scatter plot:</h2>
+<p>Avaliable with two or more numeric csv file columns</p>
+X Side:
+  <select name="xAX" id="scatterX">
+        <!--<option value ="petalWidth">petalWidth</option>
         <option value ="petalLength">petalLength</option>
         <option value ="sepalLength">sepalLength</option>
-        <option value ="sepalWidth">sepalWidth</option>
+        <option value ="sepalWidth">sepalWidth</option>-->
   </select>
 
-<!-- <div id="label2"><b>y-Axis:</b></div> -->
-  <select name="yAX" id="yAXs">
-        <option value ="petalLength">petalLength</option>
+Y Side:
+  <select name="yAX" id="scatterY">
+        <!--<option value ="petalLength">petalLength</option>
         <option value ="petalWidth">petalWidth</option>
         <option value ="sepalLength">sepalLength</option>
-        <option value ="sepalWidth">sepalWidth</option>
+        <option value ="sepalWidth">sepalWidth</option>-->
   </select>  
-
+</div>
   <br>
   <script type="text/javascript">
     var urlcsv = "";
     var loaded = false;
+    var headers = null;
+    var numHeaders = new Array();
+    var catHeaders = new Array();
 
     function applycsv() {
-      urlcsv = document.getElementById("urlinput").value;
-      document.getElementById("urltext").innerHTML = "Selected file: " + urlcsv;
+      	urlcsv = document.getElementById("urlinput").value;
+      	document.getElementById("urltext").innerHTML = "Selected file: " + urlcsv;
 
-      if(urlcsv && loaded == false) {
-        var fileImport = document.createElement('script');
-        fileImport.src = 'script.js';
-        document.head.appendChild(fileImport);
-        loaded = true;
-      } 
+      	if(urlcsv && !loaded) {
+      		loaded = true;
+	 		d3.csv(urlcsv, function(csv) {
+	 			headers = Object.keys(csv[0]);
+
+  				headers.forEach(function(d) {
+  					var result = null;
+ 					result = result + isNaN(csv[0][d]);
+ 					if(!result){
+ 						numHeaders.push(d);
+ 					} else {
+ 						catHeaders.push(d);
+ 					}
+  				});
+
+  				console.log(numHeaders.length);
+
+  				if(numHeaders.length > 1) {
+  					
+	            numHeaders.forEach(function(head){
+	            	var option = document.createElement("option");
+    				option.value = head;
+    				option.text = head;
+    				listX = document.getElementById('scatterX');
+    				listX.appendChild(option);
+				});
+
+				numHeaders.forEach(function(head){
+	            	var option = document.createElement("option");
+    				option.value = head;
+    				option.text = head;
+    				listY = document.getElementById('scatterY');
+    				listY.appendChild(option);
+				});
+					document.getElementById('scatterAvail').innerHTML = "This visualization is now avaliable";
+					document.getElementById("scatterAvail").style.color = 'green';
+
+        			var fileImport = document.createElement('script');
+        			fileImport.src = 'script.js';
+        			document.head.appendChild(fileImport);
+				} else {
+					document.getElementById('scatterAvail').innerHTML = "This visualization is not avaliable with this csv file";
+					document.getElementById("scatterAvail").style.color = 'red';
+				}
+			}
+ 		)} else if(!urlcsv) {
+ 			alert("Please select a valid csv file");
+ 		}
     }
 
     function resetcsv() {
-      var input = document.getElementById("urlinput");
-      input.value = "";
-      location.reload();
+      	var input = document.getElementById("urlinput");
+      	input.value = "";
+      	location.reload();
     }
-  </script>
+  	</script>
  <!--<script src="script.js"></script>-->
 </body>
